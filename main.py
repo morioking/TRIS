@@ -2,7 +2,6 @@
 
 import sys
 import re
-import xml.dom.minidom
 
 argvs = sys.argv
 argc = len(argvs)
@@ -21,7 +20,7 @@ class MyClass:
 
 
 a = MyClass()
-a.setName("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+a.setName("start")
 print a.getName()
 
 
@@ -33,20 +32,14 @@ print 'The content of %s ....' % argvs[1]
 f = open(argvs[1])
 line = f.readline()
 pattern = r"<tr>"
-dom = xml.dom.minidom.parse(argvs[1])
 
-print dom.documentElement.tagName
-for node in dom.documentElement.childNodes:
-	if node.nodeType == node.ELEMENT_NODE:
-		print "    " + node.tagName
+i = 0
+j = 0
+table[[]]
+print table
 
-		for node2 in node.childNodes:
-			if node2.nodeType == node2.ELEMENT_NODE:
-				print "        " + node2.tagName
-
-
-# while line:
-# 	if re.match(pattern, line) != "None":
-# 		print line 
-# 	line = f.readline()
+while line:
+	if re.match("<tr>", line):
+		print line
+	line = f.readline()
 f.close
