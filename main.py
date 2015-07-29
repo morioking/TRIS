@@ -3,8 +3,8 @@
 import sys
 import re
 
-argvs = sys.argv
-argc = len(argvs)
+ROW = 24
+COLOUMN = 20
 
 class MyClass:
 	def __init__(self):
@@ -17,11 +17,13 @@ class MyClass:
 		self.name = name
 
 
+argvs = sys.argv
+argc = len(argvs)
 
 
-a = MyClass()
-a.setName("start")
-print a.getName()
+# a = MyClass()
+# a.setName("start")
+# print a.getName()
 
 
 print argvs
@@ -33,13 +35,21 @@ f = open(argvs[1])
 line = f.readline()
 pattern = r"<tr>"
 
+
+table = [[0 for i in range(ROW)] for j in range(COLOUMN)]
 i = 0
 j = 0
-table[[]]
-print table
 
 while line:
-	if re.match("<tr>", line):
+	if re.match(".*<th>", line):
+		if i < 10:
+			table[i][j] = line
 		print line
+		print i
+		j += 1
+	if re.match("<tr>", line):
+		i += 1
+		#print line
 	line = f.readline()
+print table
 f.close
