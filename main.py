@@ -31,26 +31,8 @@ PLAY_COUNT = 21
 LAST_PLAYED = 22
 IMPORT_DATE = 23
 
-
-class MyClass:
-	def __init__(self):
-		self.name = "hoge"
-
-	def getName(self):
-		return self.name
-
-	def setName(self, name):
-		self.name = name
-
-
 argvs = sys.argv
 argc = len(argvs)
-
-
-# a = MyClass()
-# a.setName("start")
-# print a.getName()
-
 
 print argvs
 print argc
@@ -59,6 +41,7 @@ print argvs[1]
 f = open(argvs[1])
 line = f.readline()
 pattern = r"<tr>"
+
 
 
 table = [["" for i in range(ROW_MAX)] for j in range(COLOUMN_MAX)]
@@ -87,16 +70,53 @@ while line:
 f.close
 
 
-# Release DateをYearに更新
-i = 0
-for i in range(COLOUMN_MAX):
-	table[i][RELEASE_DATE] = re.sub("Release Date", "Year", table[i][RELEASE_DATE])
-	table[i][RELEASE_DATE] = re.sub("/../..", "", table[i][RELEASE_DATE])
+# ffmpegにて画像を抽出する処理を書く
+
+
 
 # HTMLファイルに書き出す
-f = open("hoge.txt", "w")
+filename = re.sub("\..*","",argvs[1])
+f = open(filename+'_out.html', "w")
+i = 0
 j = 0
-f.write(table[NUM][j]+'\n')
-f.write(table[TITLE][j]+'\n')
+
+f.write('<link href="./example.css" rel="stylesheet" type="text/css">\n')
+f.write('<table class="example">\n')
+f.write('<caption>'+filename+'</caption>\n')
+
+
+f.write('<thead>\n')
+f.write('<tr>\n')
+#f.write('<th>'+table[i][NUM]+'</th>\n')
+f.write('<th>#</th>\n') # Numは#に変更
+f.write('<th>image</th>\n')
+f.write('<th>'+table[i][TITLE]+'</th>\n')
+f.write('<th>'+table[i][BPM]+'</th>\n')
+f.write('<th>'+table[i][KEY]+'</th>\n')
+f.write('<th>'+table[i][ARTIST]+'</th>\n')
+f.write('<th>'+table[i][LABEL]+'</th>\n')
+#f.write('<th>'+table[i][RELEASE_DATE]+'</th>\n')
+f.write('<th>YEAR</th>\n') # Relase dateはYearに変更
+f.write('</tr>\n')
+f.write('</thead>\n')
+
+f.write('<tbody>\n')
+
+i = 1
+while i < COLOUMN_MAX:
+	if table[i][NUM] != "":
+		f.write('<tr>\n')
+		f.write('<td>'+table[i][NUM]+'</td>\n')
+		f.write('<td><img src="./image/1.JPG " width="32" height="32"></td>\n')
+		f.write('<td>'+table[i][TITLE]+'</td>\n')
+		f.write('<td>'+re.sub("\..*","",table[i][BPM])+'</td>\n') #小数点以下は削除
+		f.write('<td>'+table[i][KEY]+'</td>\n')
+		f.write('<td>'+table[i][ARTIST]+'</td>\n')
+		f.write('<td>'+table[i][LABEL]+'</td>\n')
+		f.write('<td>'+re.sub("/../..", "", table[i][RELEASE_DATE])+'</td>\n')# 日付は削除
+		f.write('</tr>\n')
+	i += 1
+
+f.write('</tbody>\n</table>\n')
 f.close()
 print "finish!"
