@@ -77,7 +77,7 @@ i = 1
 while i < COLOUMN_MAX:
 	input_f = table[i][FILE]
 
-	# mp3ファイルがない場合は終了
+	# mp3ファイルがない場合はwhileを抜ける
 	if input_f == "":
 		break
 
@@ -86,7 +86,7 @@ while i < COLOUMN_MAX:
 	input_f = input_f.replace(':','/')
 	output_f = imagefilepath+table[i][NUM]+".jpg"
 
-	# front coverのStreamを検索する
+	# mp3のtag情報からfront coverのStreamを検索する
 	p = subprocess.Popen(["ffmpeg","-i",input_f], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 	stdout_data = p.stdout.read()
 	stderr_data = p.stderr.read()
@@ -96,13 +96,10 @@ while i < COLOUMN_MAX:
 	tmp = 0
 	for tmp in range(len(stderr_data_list)):
 		if re.match(".*Stream", stderr_data_list[tmp]):
-		#if 'Stream' in stderr_data_list[tmp]:
 			stream += 1
-			#if re.match(".*Comment", stderr_data_list[tmp]):
 			if re.match(".*front", stderr_data_list[tmp+2]):
 				map = "0:"+str(stream)
 				break
-		#map = "0:"+str(stream)
 
 	# 画像を抽出する
 	if map == "":
@@ -116,7 +113,7 @@ while i < COLOUMN_MAX:
 
 
 
-# HTMLƒtƒ@ƒCƒ‹‚É‘‚«o‚·
+# export HTML file
 filename = re.sub("\..*","",argvs[1])
 f = open(filename+'_out.html', "w")
 i = 0
@@ -130,7 +127,7 @@ f.write('<caption>'+filename+'</caption>\n')
 f.write('<thead>\n')
 f.write('<tr>\n')
 #f.write('<th>'+table[i][NUM]+'</th>\n')
-f.write('<th>#</th>\n') # Num‚Í#‚É•ÏX
+f.write('<th>#</th>\n') # Num. is changed to # 
 f.write('<th>image</th>\n')
 f.write('<th>'+table[i][TITLE]+'</th>\n')
 f.write('<th>'+table[i][BPM]+'</th>\n')
@@ -138,7 +135,7 @@ f.write('<th>'+table[i][KEY]+'</th>\n')
 f.write('<th>'+table[i][ARTIST]+'</th>\n')
 f.write('<th>'+table[i][LABEL]+'</th>\n')
 #f.write('<th>'+table[i][RELEASE_DATE]+'</th>\n')
-f.write('<th>YEAR</th>\n') # Relase date‚ÍYear‚É•ÏX
+f.write('<th>YEAR</th>\n') # Relase date is changed to Year
 f.write('</tr>\n')
 f.write('</thead>\n')
 
@@ -151,11 +148,11 @@ while i < COLOUMN_MAX:
 		f.write('<td>'+table[i][NUM]+'</td>\n')
 		f.write('<td><img src="' + imagefilepath + str(i) + '.JPG " width="32" height="32"></td>\n')
 		f.write('<td>'+table[i][TITLE]+'</td>\n')
-		f.write('<td>'+re.sub("\..*","",table[i][BPM])+'</td>\n') #¬”“_ˆÈ‰º‚Ííœ
+		f.write('<td>'+re.sub("\..*","",table[i][BPM])+'</td>\n') #Omit the figures blow the decimal place
 		f.write('<td>'+table[i][KEY]+'</td>\n')
 		f.write('<td>'+table[i][ARTIST]+'</td>\n')
 		f.write('<td>'+table[i][LABEL]+'</td>\n')
-		f.write('<td>'+re.sub("/../..", "", table[i][RELEASE_DATE])+'</td>\n')# “ú•t‚Ííœ
+		f.write('<td>'+re.sub("/../..", "", table[i][RELEASE_DATE])+'</td>\n') # Omit date
 		f.write('</tr>\n')
 	i += 1
 
