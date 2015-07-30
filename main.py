@@ -1,7 +1,10 @@
+#! /usr/bin/python
 # coding: UTF-8
 
 import sys
+import subprocess
 import re
+import commands
 
 ROW_MAX = 24
 COLOUMN_MAX = 20
@@ -40,15 +43,11 @@ print argvs[1]
 
 f = open(argvs[1])
 line = f.readline()
-pattern = r"<tr>"
-
-
-
 table = [["" for i in range(ROW_MAX)] for j in range(COLOUMN_MAX)]
 i = 0
 j = 0
 
-# html‚Ìtable‚©‚çList‚Ö—v‘f‚ğŠi”[
+# htmlã‹ã‚‰Tableã«
 while line:
 	if re.match(".*<th>", line):
 		cell = re.sub(".*<th>","",line)
@@ -70,11 +69,54 @@ while line:
 f.close
 
 
-# ffmpeg‚É‚Ä‰æ‘œ‚ğ’Šo‚·‚éˆ—‚ğ‘‚­
+# ffmpegã‚’ç”¨ã„ã¦ç”»åƒã‚’æŠ½å‡ºã™ã‚‹
+imagefilepath = "./image/"+re.sub("\..*","",argvs[1])+"/"
+subprocess.call(["mkdir",imagefilepath])
+
+i = 1
+while i < COLOUMN_MAX:
+	input_f = table[i][FILE]
+
+	# mp3ãƒ•ã‚¡ã‚¤ãƒ«ãŒãªã„å ´åˆã¯çµ‚äº†
+	if input_f == "":
+		break
+
+	input_f = input_f.replace('Macintosh HD','')
+	input_f = input_f.replace('&amp;','&')
+	input_f = input_f.replace(':','/')
+	output_f = imagefilepath+table[i][NUM]+".jpg"
+
+	# front coverã®Streamã‚’æ¤œç´¢ã™ã‚‹
+	p = subprocess.Popen(["ffmpeg","-i",input_f], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+	stdout_data = p.stdout.read()
+	stderr_data = p.stderr.read()
+	stderr_data_list = stderr_data.split('\n')
+	stream = -1
+	map = ""
+	tmp = 0
+	for tmp in range(len(stderr_data_list)):
+		if re.match(".*Stream", stderr_data_list[tmp]):
+		#if 'Stream' in stderr_data_list[tmp]:
+			stream += 1
+			#if re.match(".*Comment", stderr_data_list[tmp]):
+			if re.match(".*front", stderr_data_list[tmp+2]):
+				map = "0:"+str(stream)
+				break
+		#map = "0:"+str(stream)
+
+	# ç”»åƒã‚’æŠ½å‡ºã™ã‚‹
+	if map == "":
+		p = subprocess.Popen(["ffmpeg","-i",input_f,output_f], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+	else:
+		p = subprocess.Popen(["ffmpeg","-i",input_f,"-map",map,output_f], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+	print table[i][TITLE] +"=>"+map
+
+	i += 1
 
 
 
-# HTMLƒtƒ@ƒCƒ‹‚É‘‚«o‚·
+# HTMLÆ’tÆ’@Æ’CÆ’â€¹â€šÃ‰Ââ€˜â€šÂ«Âoâ€šÂ·
 filename = re.sub("\..*","",argvs[1])
 f = open(filename+'_out.html', "w")
 i = 0
@@ -88,7 +130,7 @@ f.write('<caption>'+filename+'</caption>\n')
 f.write('<thead>\n')
 f.write('<tr>\n')
 #f.write('<th>'+table[i][NUM]+'</th>\n')
-f.write('<th>#</th>\n') # Num‚Í#‚É•ÏX
+f.write('<th>#</th>\n') # Numâ€šÃ#â€šÃ‰â€¢ÃÂX
 f.write('<th>image</th>\n')
 f.write('<th>'+table[i][TITLE]+'</th>\n')
 f.write('<th>'+table[i][BPM]+'</th>\n')
@@ -96,7 +138,7 @@ f.write('<th>'+table[i][KEY]+'</th>\n')
 f.write('<th>'+table[i][ARTIST]+'</th>\n')
 f.write('<th>'+table[i][LABEL]+'</th>\n')
 #f.write('<th>'+table[i][RELEASE_DATE]+'</th>\n')
-f.write('<th>YEAR</th>\n') # Relase date‚ÍYear‚É•ÏX
+f.write('<th>YEAR</th>\n') # Relase dateâ€šÃYearâ€šÃ‰â€¢ÃÂX
 f.write('</tr>\n')
 f.write('</thead>\n')
 
@@ -107,13 +149,13 @@ while i < COLOUMN_MAX:
 	if table[i][NUM] != "":
 		f.write('<tr>\n')
 		f.write('<td>'+table[i][NUM]+'</td>\n')
-		f.write('<td><img src="./image/1.JPG " width="32" height="32"></td>\n')
+		f.write('<td><img src="' + imagefilepath + str(i) + '.JPG " width="32" height="32"></td>\n')
 		f.write('<td>'+table[i][TITLE]+'</td>\n')
-		f.write('<td>'+re.sub("\..*","",table[i][BPM])+'</td>\n') #¬”“_ˆÈ‰º‚Ííœ
+		f.write('<td>'+re.sub("\..*","",table[i][BPM])+'</td>\n') #ÂÂ¬Ââ€â€œ_Ë†Ãˆâ€°Âºâ€šÃÂÃ­ÂÅ“
 		f.write('<td>'+table[i][KEY]+'</td>\n')
 		f.write('<td>'+table[i][ARTIST]+'</td>\n')
 		f.write('<td>'+table[i][LABEL]+'</td>\n')
-		f.write('<td>'+re.sub("/../..", "", table[i][RELEASE_DATE])+'</td>\n')# “ú•t‚Ííœ
+		f.write('<td>'+re.sub("/../..", "", table[i][RELEASE_DATE])+'</td>\n')# â€œÃºâ€¢tâ€šÃÂÃ­ÂÅ“
 		f.write('</tr>\n')
 	i += 1
 

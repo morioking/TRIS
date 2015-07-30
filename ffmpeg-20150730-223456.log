@@ -1,0 +1,152 @@
+ffmpeg started on 2015-07-30 at 22:34:56
+Report written to "ffmpeg-20150730-223456.log"
+Command line:
+ffmpeg -i "03 Planes _ Trains (Dosem Remix).mp3" -report
+ffmpeg version 2.7.1 Copyright (c) 2000-2015 the FFmpeg developers
+  built with llvm-gcc 4.2.1 (LLVM build 2336.11.00)
+  configuration: --prefix=/Volumes/Ramdisk/sw --enable-gpl --enable-pthreads --enable-version3 --enable-libspeex --enable-libvpx --disable-decoder=libvpx --enable-libmp3lame --enable-libtheora --enable-libvorbis --enable-libx264 --enable-avfilter --enable-libopencore_amrwb --enable-libopencore_amrnb --enable-filters --enable-libgsm --enable-libvidstab --enable-libx265 --disable-doc --arch=x86_64 --enable-runtime-cpudetect
+  libavutil      54. 27.100 / 54. 27.100
+  libavcodec     56. 41.100 / 56. 41.100
+  libavformat    56. 36.100 / 56. 36.100
+  libavdevice    56.  4.100 / 56.  4.100
+  libavfilter     5. 16.101 /  5. 16.101
+  libswscale      3.  1.101 /  3.  1.101
+  libswresample   1.  2.100 /  1.  2.100
+  libpostproc    53.  3.100 / 53.  3.100
+Splitting the commandline.
+Reading option '-i' ... matched as input file with argument '03 Planes _ Trains (Dosem Remix).mp3'.
+Reading option '-report' ... matched as option 'report' (generate a report) with argument '1'.
+Finished splitting the commandline.
+Parsing a group of options: global .
+Applying option report (generate a report) with argument 1.
+Successfully parsed a group of options.
+Parsing a group of options: input file 03 Planes _ Trains (Dosem Remix).mp3.
+Successfully parsed a group of options.
+Opening an input file: 03 Planes _ Trains (Dosem Remix).mp3.
+[mp3 @ 0x7fa693813800] Format mp3 probed with size=524288 and score=51
+[mp3 @ 0x7fa693813800] id3v2 ver:4 flags:00 len:514360
+[mp3 @ 0x7fa693813800] pad 576 1573
+[mp3 @ 0x7fa693813800] Skipping 0 bytes of junk at 515414.
+[mp3 @ 0x7fa693813800] Before avformat_find_stream_info() pos: 515414 bytes read:524288 seeks:0
+[mjpeg @ 0x7fa693038000] marker=d8 avail_size_in_buf=101666
+[mjpeg @ 0x7fa693038000] marker parser used 0 bytes (0 bits)
+[mjpeg @ 0x7fa693038000] marker=e0 avail_size_in_buf=101664
+[mjpeg @ 0x7fa693038000] marker parser used 16 bytes (128 bits)
+[mjpeg @ 0x7fa693038000] marker=fe avail_size_in_buf=101646
+[mjpeg @ 0x7fa693038000] marker parser used 60 bytes (480 bits)
+[mjpeg @ 0x7fa693038000] marker=db avail_size_in_buf=101584
+[mjpeg @ 0x7fa693038000] index=0
+[mjpeg @ 0x7fa693038000] qscale[0]: 0
+[mjpeg @ 0x7fa693038000] marker parser used 67 bytes (536 bits)
+[mjpeg @ 0x7fa693038000] marker=db avail_size_in_buf=101515
+[mjpeg @ 0x7fa693038000] index=1
+[mjpeg @ 0x7fa693038000] qscale[1]: 0
+[mjpeg @ 0x7fa693038000] marker parser used 67 bytes (536 bits)
+[mjpeg @ 0x7fa693038000] marker=c0 avail_size_in_buf=101446
+[mjpeg @ 0x7fa693038000] sof0: picture: 500x500
+[mjpeg @ 0x7fa693038000] component 0 2:2 id: 0 quant:0
+[mjpeg @ 0x7fa693038000] component 1 1:1 id: 1 quant:1
+[mjpeg @ 0x7fa693038000] component 2 1:1 id: 2 quant:1
+[mjpeg @ 0x7fa693038000] pix fmt id 22111100
+[mjpeg @ 0x7fa693038000] marker parser used 17 bytes (136 bits)
+[mjpeg @ 0x7fa693038000] marker=c4 avail_size_in_buf=101427
+[mjpeg @ 0x7fa693038000] class=0 index=0 nb_codes=12
+[mjpeg @ 0x7fa693038000] marker parser used 31 bytes (248 bits)
+[mjpeg @ 0x7fa693038000] marker=c4 avail_size_in_buf=101394
+[mjpeg @ 0x7fa693038000] class=1 index=0 nb_codes=251
+[mjpeg @ 0x7fa693038000] marker parser used 181 bytes (1448 bits)
+[mjpeg @ 0x7fa693038000] marker=c4 avail_size_in_buf=101211
+[mjpeg @ 0x7fa693038000] class=0 index=1 nb_codes=12
+[mjpeg @ 0x7fa693038000] marker parser used 31 bytes (248 bits)
+[mjpeg @ 0x7fa693038000] marker=c4 avail_size_in_buf=101178
+[mjpeg @ 0x7fa693038000] class=1 index=1 nb_codes=251
+[mjpeg @ 0x7fa693038000] marker parser used 181 bytes (1448 bits)
+[mjpeg @ 0x7fa693038000] escaping removed 1714 bytes
+[mjpeg @ 0x7fa693038000] marker=da avail_size_in_buf=100995
+[mjpeg @ 0x7fa693038000] component: 0
+[mjpeg @ 0x7fa693038000] component: 1
+[mjpeg @ 0x7fa693038000] component: 2
+[mjpeg @ 0x7fa693038000] marker parser used 99280 bytes (794240 bits)
+[mjpeg @ 0x7fa693038000] marker=d9 avail_size_in_buf=0
+[mjpeg @ 0x7fa693038000] decode frame unused 0 bytes
+[mjpeg @ 0x7fa69381c400] marker=d8 avail_size_in_buf=296766
+[mjpeg @ 0x7fa69381c400] marker parser used 0 bytes (0 bits)
+[mjpeg @ 0x7fa69381c400] marker=e0 avail_size_in_buf=296764
+[mjpeg @ 0x7fa69381c400] marker parser used 16 bytes (128 bits)
+[mjpeg @ 0x7fa69381c400] marker=fe avail_size_in_buf=296746
+[mjpeg @ 0x7fa69381c400] marker parser used 60 bytes (480 bits)
+[mjpeg @ 0x7fa69381c400] marker=db avail_size_in_buf=296684
+[mjpeg @ 0x7fa69381c400] index=0
+[mjpeg @ 0x7fa69381c400] qscale[0]: 0
+[mjpeg @ 0x7fa69381c400] marker parser used 67 bytes (536 bits)
+[mjpeg @ 0x7fa69381c400] marker=db avail_size_in_buf=296615
+[mjpeg @ 0x7fa69381c400] index=1
+[mjpeg @ 0x7fa69381c400] qscale[1]: 0
+[mjpeg @ 0x7fa69381c400] marker parser used 67 bytes (536 bits)
+[mjpeg @ 0x7fa69381c400] marker=c0 avail_size_in_buf=296546
+[mjpeg @ 0x7fa69381c400] sof0: picture: 500x500
+[mjpeg @ 0x7fa69381c400] component 0 2:2 id: 0 quant:0
+[mjpeg @ 0x7fa69381c400] component 1 1:1 id: 1 quant:1
+[mjpeg @ 0x7fa69381c400] component 2 1:1 id: 2 quant:1
+[mjpeg @ 0x7fa69381c400] pix fmt id 22111100
+[mjpeg @ 0x7fa69381c400] marker parser used 17 bytes (136 bits)
+[mjpeg @ 0x7fa69381c400] marker=c4 avail_size_in_buf=296527
+[mjpeg @ 0x7fa69381c400] class=0 index=0 nb_codes=12
+[mjpeg @ 0x7fa69381c400] marker parser used 31 bytes (248 bits)
+[mjpeg @ 0x7fa69381c400] marker=c4 avail_size_in_buf=296494
+[mjpeg @ 0x7fa69381c400] class=1 index=0 nb_codes=251
+[mjpeg @ 0x7fa69381c400] marker parser used 181 bytes (1448 bits)
+[mjpeg @ 0x7fa69381c400] marker=c4 avail_size_in_buf=296311
+[mjpeg @ 0x7fa69381c400] class=0 index=1 nb_codes=12
+[mjpeg @ 0x7fa69381c400] marker parser used 31 bytes (248 bits)
+[mjpeg @ 0x7fa69381c400] marker=c4 avail_size_in_buf=296278
+[mjpeg @ 0x7fa69381c400] class=1 index=1 nb_codes=251
+[mjpeg @ 0x7fa69381c400] marker parser used 181 bytes (1448 bits)
+[mjpeg @ 0x7fa69381c400] escaping removed 1037 bytes
+[mjpeg @ 0x7fa69381c400] marker=da avail_size_in_buf=296095
+[mjpeg @ 0x7fa69381c400] component: 0
+[mjpeg @ 0x7fa69381c400] component: 1
+[mjpeg @ 0x7fa69381c400] component: 2
+[mjpeg @ 0x7fa69381c400] marker parser used 295057 bytes (2360454 bits)
+[mjpeg @ 0x7fa69381c400] marker=d9 avail_size_in_buf=0
+[mjpeg @ 0x7fa69381c400] decode frame unused 0 bytes
+[mp3 @ 0x7fa693813800] demuxer injecting skip 1105 / discard 0
+[mp3 @ 0x7fa693002c00] skip 1105 / discard 0 samples due to side data
+[mp3 @ 0x7fa693002c00] skip 1105/1152 samples
+[mp3 @ 0x7fa693813800] max_analyze_duration 5000000 reached at 5015510 microseconds
+[mp3 @ 0x7fa693813800] After avformat_find_stream_info() pos: 719190 bytes read:720896 seeks:0 frames:197
+Input #0, mp3, from '03 Planes _ Trains (Dosem Remix).mp3':
+  Metadata:
+    album           : Planes & Trains Remixes
+    genre           : Techno
+    TDOR            : 2014-01-20
+    TKEY            : 1m
+    encoded_by      : Beatport
+    TFLT            : MPG/3
+    title           : Planes & Trains (Dosem Remix)
+    artist          : Hot Since 82
+    TSRC            : ES84B1310216
+    TIT1            : Suara
+    publisher       : Suara
+    TPE4            : Dosem
+    track           : 3
+    date            : 2014
+    TBPM            : 125
+  Duration: 00:06:42.13, start: 0.025056, bitrate: 330 kb/s
+    Stream #0:0, 194, 1/14112000: Audio: mp3, 44100 Hz, stereo, s16p, 320 kb/s
+    Metadata:
+      encoder         : LAME3.97 
+    Side data:
+      replaygain: track gain - -6.900000, track peak - unknown, album gain - unknown, album peak - unknown, 
+    Stream #0:1, 1, 1/90000: Video: mjpeg, yuvj420p(pc, bt470bg/unknown/unknown), 500x500 [SAR 1:1 DAR 1:1], 90k tbr, 90k tbn, 90k tbc
+    Metadata:
+      comment         : Publisher/Studio logotype
+    Stream #0:2, 1, 1/90000: Video: png, pal8(pc), 1500x250, 90k tbr, 90k tbn, 90k tbc
+    Metadata:
+      comment         : A bright coloured fish
+    Stream #0:3, 1, 1/90000: Video: mjpeg, yuvj420p(pc, bt470bg/unknown/unknown), 500x500 [SAR 1:1 DAR 1:1], 90k tbr, 90k tbn, 90k tbc
+    Metadata:
+      comment         : Cover (front)
+Successfully opened the file.
+At least one output file must be specified
+[AVIOContext @ 0x7fa692601340] Statistics: 720896 bytes read, 0 seeks
