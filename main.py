@@ -3,8 +3,8 @@
 import sys
 import re
 
-ROW = 24
-COLOUMN = 20
+ROW_MAX = 24
+COLOUMN_MAX = 20
 
 NUM = 0
 TITLE = 1
@@ -56,29 +56,47 @@ print argvs
 print argc
 print argvs[1]
 
-#print 'The content of %s ....' % argvs[1]
-
 f = open(argvs[1])
 line = f.readline()
 pattern = r"<tr>"
 
 
-table = [[0 for i in range(ROW)] for j in range(COLOUMN)]
+table = [["" for i in range(ROW_MAX)] for j in range(COLOUMN_MAX)]
 i = 0
 j = 0
 
+# htmlのtableからListへ要素を格納
 while line:
 	if re.match(".*<th>", line):
-		if i < 10:
-			table[i][j] = line
-		#print line
-		#print i
+		cell = re.sub(".*<th>","",line)
+		cell = re.sub("</th>.*\n","",cell)
+		table[i][j] = cell
 		j += 1
-	if re.match("<tr>", line):
+	elif re.match(".*<td>", line):
+		cell = re.sub(".*<td>","",line)
+		cell = re.sub("</td>.*\n","",cell)
+		table[i][j] = cell
+		j += 1
+	elif re.match(".*<tr>", line):
+		j = 0
+	elif re.match(".*</tr>", line):
 		i += 1
-		#print line
+	
 	line = f.readline()
-print table
-#print table[1]
-#print table[0][NUM]
+
 f.close
+
+
+# Release DateをYearに更新
+i = 0
+for i in range(COLOUMN_MAX):
+	table[i][RELEASE_DATE] = re.sub("Release Date", "Year", table[i][RELEASE_DATE])
+	table[i][RELEASE_DATE] = re.sub("/../..", "", table[i][RELEASE_DATE])
+
+# HTMLファイルに書き出す
+f = open("hoge.txt", "w")
+j = 0
+f.write(table[NUM][j]+'\n')
+f.write(table[TITLE][j]+'\n')
+f.close()
+print "finish!"
