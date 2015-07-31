@@ -108,7 +108,7 @@ while i < COLOUMN_MAX:
 	else:
 		p = subprocess.Popen(["ffmpeg","-i",input_f,"-map",map,output_f], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
-	print table[i][TITLE] +" -> Stream #"+map
+	print "    "+table[i][TITLE] +" -> Stream #"+map
 
 	i += 1
 
