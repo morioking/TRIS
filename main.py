@@ -71,7 +71,7 @@ f.close
 
 # ffmpegを用いて画像を抽出する
 imagefilepath = "./image/"+re.sub("\..*","",argvs[1])+"/"
-subprocess.call(["mkdir",imagefilepath])
+subprocess.call(["mkdir",imagefilepath]) # UNIX only, Don't work on MS-DOS
 
 i = 1
 while i < COLOUMN_MAX:
@@ -114,6 +114,7 @@ while i < COLOUMN_MAX:
 
 
 # export HTML file
+print "export html................"
 filename = re.sub("\..*","",argvs[1])
 f = open(filename+'_out.html', "w")
 i = 0
