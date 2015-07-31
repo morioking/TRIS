@@ -8,5 +8,5 @@ We need to install ffmpeg and wkhtmltopdf before use TRIS.
 ## How do I use TRIS?
 1. Install ffmpeg and wkhtmltopdf
 2. Make Traktor playlist's html(save as Webpage) 
-3. Launch OS X Terminal
-4. Type "python main [Traktor's playlist html]"
+3. Launch OS X Terminal and move current directry
+4. Type "python main.py [Traktor's playlist html]"
