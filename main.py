@@ -70,8 +70,9 @@ f.close
 
 
 # ffmpegを用いて画像を抽出する
+print "extract image................"
 imagefilepath = "./image/"+re.sub("\..*","",argvs[1])+"/"
-subprocess.call(["mkdir",imagefilepath]) # UNIX only, Don't work on MS-DOS
+subprocess.Popen(["mkdir",imagefilepath], stdout=subprocess.PIPE, stderr=subprocess.PIPE) # UNIX only, Don't work on MS-DOS
 
 i = 1
 while i < COLOUMN_MAX:
@@ -107,16 +108,15 @@ while i < COLOUMN_MAX:
 	else:
 		p = subprocess.Popen(["ffmpeg","-i",input_f,"-map",map,output_f], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
-	print table[i][TITLE] +"=>"+map
+	print table[i][TITLE] +" -> Stream #"+map
 
 	i += 1
 
 
-
 # export HTML file
 print "export html................"
-filename = re.sub("\..*","",argvs[1])
-f = open(filename+'_out.html', "w")
+filename = re.sub("\..*","",argvs[1])+'_out.html'
+f = open(filename, "w")
 i = 0
 j = 0
 
@@ -159,4 +159,9 @@ while i < COLOUMN_MAX:
 
 f.write('</tbody>\n</table>\n')
 f.close()
+
+print "convert html to pdf........"
+
+p = subprocess.Popen(["wkhtmltopdf",filename,filename.replace('html', 'pdf')], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
 print "finish!"
