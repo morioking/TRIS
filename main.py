@@ -34,6 +34,9 @@ PLAY_COUNT = 21
 LAST_PLAYED = 22
 IMPORT_DATE = 23
 
+IMAGE_WIDTH = 32
+IMAGE_HEIGHT = 32
+
 argvs = sys.argv
 argc = len(argvs)
 
@@ -92,6 +95,7 @@ while i < COLOUMN_MAX:
 	stdout_data = p.stdout.read()
 	stderr_data = p.stderr.read()
 	stderr_data_list = stderr_data.split('\n')
+	if i == 1: print stderr_data
 	stream = -1
 	map = ""
 	tmp = 0
@@ -122,14 +126,14 @@ j = 0
 
 f.write('<link href="./example.css" rel="stylesheet" type="text/css">\n')
 f.write('<table class="example">\n')
-f.write('<caption>'+filename+'</caption>\n')
+f.write('<caption>'+filename.replace('_out.html','')+'</caption>\n')
 
 
 f.write('<thead>\n')
 f.write('<tr>\n')
 #f.write('<th>'+table[i][NUM]+'</th>\n')
 f.write('<th>#</th>\n') # Num. is changed to # 
-f.write('<th>image</th>\n')
+f.write('<th>.</th>\n') # Image row  is .
 f.write('<th>'+table[i][TITLE]+'</th>\n')
 f.write('<th>'+table[i][BPM]+'</th>\n')
 f.write('<th>'+table[i][KEY]+'</th>\n')
@@ -147,7 +151,7 @@ while i < COLOUMN_MAX:
 	if table[i][NUM] != "":
 		f.write('<tr>\n')
 		f.write('<td>'+table[i][NUM]+'</td>\n')
-		f.write('<td><img src="' + imagefilepath + str(i) + '.JPG " width="32" height="32"></td>\n')
+		f.write('<td><img src="' + imagefilepath + str(i) + '.JPG " width="' + str(IMAGE_WIDTH) + '" height="' + str(IMAGE_HEIGHT) + '"></td>\n')
 		f.write('<td>'+table[i][TITLE]+'</td>\n')
 		f.write('<td>'+re.sub("\..*","",table[i][BPM])+'</td>\n') #Omit the figures blow the decimal place
 		f.write('<td>'+table[i][KEY]+'</td>\n')
