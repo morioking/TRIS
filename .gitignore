@@ -9,3 +9,7 @@ sample.xml
 hoge.txt
 
 image
+
+*.html
+
+*.pdf

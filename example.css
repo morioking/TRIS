@@ -1,13 +1,13 @@
 /* --- 表全体 --- */
 table.example {
 /* width: 650px; 表の幅 */
-width: 100mm; /* 表の幅 */
+width: 115mm; /* 表の幅 */
 height: 100mm; /* 表の幅 */
 /*margin-bottom: 30px; /* 表の下マージン */
 border: 1pt #c0c0c0 solid; /* 大枠の境界線 */
 border-collapse: collapse;
 /* font-size: 80%; */
-font-size: 5pt;
+font-size: 7pt;
 }
 
 /* --- 表タイトル --- */

@@ -34,8 +34,7 @@ PLAY_COUNT = 21
 LAST_PLAYED = 22
 IMPORT_DATE = 23
 
-IMAGE_WIDTH = 32
-IMAGE_HEIGHT = 32
+
 
 argvs = sys.argv
 argc = len(argvs)
@@ -70,6 +69,13 @@ while line:
 	line = f.readline()
 
 f.close
+
+i = 0
+Max_num = 0
+while i < COLOUMN_MAX:
+	if table[i][NUM] != "":
+		Max_num = table[i][NUM]
+	i += 1
 
 
 # ffmpegを用いて画像を抽出する
@@ -124,6 +130,18 @@ f = open(filename, "w")
 i = 0
 j = 0
 
+if int(Max_num) > 11:
+	Image_width = 32 * 11 / int(Max_num)
+	Image_height = 32 * 11 / int(Max_num)
+else:
+	Image_width = 32
+	Image_height = 32
+
+
+print "Image size is.........." + str(Image_width) + str(Image_height)
+
+
+
 f.write('<link href="./example.css" rel="stylesheet" type="text/css">\n')
 f.write('<table class="example">\n')
 f.write('<caption>'+filename.replace('_out.html','')+'</caption>\n')
@@ -151,7 +169,7 @@ while i < COLOUMN_MAX:
 	if table[i][NUM] != "":
 		f.write('<tr>\n')
 		f.write('<td>'+table[i][NUM]+'</td>\n')
-		f.write('<td><img src="' + imagefilepath + str(i) + '.JPG " width="' + str(IMAGE_WIDTH) + '" height="' + str(IMAGE_HEIGHT) + '"></td>\n')
+		f.write('<td><img src="' + imagefilepath + str(i) + '.JPG " width="' + str(Image_width) + '" height="' + str(Image_height) + '"></td>\n')
 		f.write('<td>'+table[i][TITLE]+'</td>\n')
 		f.write('<td>'+re.sub("\..*","",table[i][BPM])+'</td>\n') #Omit the figures blow the decimal place
 		f.write('<td>'+table[i][KEY]+'</td>\n')
